@@ -12,7 +12,7 @@ namespace Assignment3.Models
 
         //passing info to movies
         public static IEnumerable<MovieEntry> Movies => movies;
-        //adding whatever moved was passed
+        //adding whatever movie was passed
         public static void AddMovie(MovieEntry movie)
         {
             movies.Add(movie);

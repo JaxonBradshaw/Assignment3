@@ -5,38 +5,55 @@
     ViewBag.Title = "Movie List";
 }
 <!--bringing in MovieEntry model-->
-@model IEnumerable<Assignment3.Models.MovieEntry>
+@model IEnumerable<Movie>
+
+
+<h2>Entered Movies</h2>
 
 <div>
-    <h2>Here are the movies currently on the list</h2>
-
-    <table>
-        <!--making header for each category-->
-        <thead>
-            <tr><th>Category</th><th>Title</th><th>Year</th><th>Director</th><th>Rating</th><th>Edited</th><th>Lent To</th><th>Notes</th></tr>
-        </thead>
-
-        <tbody>
-            <!--Loop to go through all of the movie entries-->
-            @foreach (Assignment3.Models.MovieEntry x in Model)
+            <!--setting up little panel display-->   
+            @foreach (var x in Model)
             {
                 <!--making sure independence day doesn't show up-->
                 @if (x.Title != "Independence Day")
                 {
-                    <tr>
-                        <td>@x.Category</td>
-                        <td>@x.Title</td>
-                        <td>@x.Year</td>
-                        <td>@x.Director</td>
-                        <td>@x.Rating</td>
-                        <td>@x.Edited</td>
-                        <td>@x.LentTo</td>
-                        <td>@x.Notes</td>
-                    </tr>
+                    <div class="container, text-left">
+                        <div class="panel-group">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title p-3">
+                                        <a data-toggle="collapse" href="#@x.MovieId">@x.Title</a>
+                                    </h4>
+                                </div>
+                                <div id="@x.MovieId" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <p>Category: @x.Category</p>
+                                        <p>Year: @x.Year</p>
+                                        <p>Director: @x.Director</p>
+                                        <p>Rating: @x.Rating</p>
+                                        <p>Edited: @x.Edited</p>
+                                        <p>Lent to: @x.LentTo</p>
+                                        <p>Notes: @x.Notes</p>
+                                        
+                                        <p>
+                                            <td class="text-center">
+
+
+
+                                                @Html.ActionLink("Edit", "Edit", new { id = x.MovieId }, new { @class = "btn btn-sm btn-primary" })
+                                            </td>
+                                            <td class="text-center">
+                                                @Html.ActionLink("Delete", "Delete", new { id = x.MovieId }, new { @class = "btn btn-sm btn-primary" })
+                                            </td>
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 }
 
             }
-        </tbody>
-
-    </table>
+    
 </div>
